@@ -1,0 +1,10 @@
+{
+  "extends": "@tsconfig/node16/tsconfig.json",
+  // "extends": "@tsconfig/node16/tsconfig.json",
+  "compilerOptions": {
+    "module": "Node16",
+    "target": "ES2017"
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}
