@@ -1,6 +1,8 @@
-import { Launch } from "./../../types/lauch";
+import { Launch } from "../../types/launch";
 
 const launches = new Map<number, Launch>();
+
+let latestFlightNumber = 100;
 
 const lauch: Launch = {
   flightNumber: 100,
@@ -20,4 +22,18 @@ function getAllLaunches() {
   return Array.from(launches.values());
 }
 
-export { getAllLaunches };
+function addNewLaunch(launch: Launch) {
+  latestFlightNumber++;
+
+  launches.set(
+    latestFlightNumber,
+    Object.assign<Launch, Launch>(launch, {
+      customer: ["Zero to Mastery", "NASA"],
+      upcoming: true,
+      success: true,
+      flightNumber: latestFlightNumber,
+    })
+  );
+}
+
+export { getAllLaunches, addNewLaunch };
