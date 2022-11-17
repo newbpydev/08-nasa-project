@@ -6,5 +6,5 @@ export interface Launch {
   target?: string;
   customer: string[];
   upcoming: boolean;
-  success: true;
+  success: boolean;
 }

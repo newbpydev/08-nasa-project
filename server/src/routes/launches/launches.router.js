@@ -8,4 +8,5 @@ const launches_controller_1 = require("./launches.controller");
 const launchRouter = express_1.default.Router();
 launchRouter.get("/", launches_controller_1.httpGetAllLaunches);
 launchRouter.post("/", launches_controller_1.httpAddNewLaunch);
+launchRouter.delete("/:id", launches_controller_1.httpAbortLaunch);
 exports.default = launchRouter;

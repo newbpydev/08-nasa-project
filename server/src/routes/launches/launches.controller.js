@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.httpAddNewLaunch = exports.httpGetAllLaunches = void 0;
+exports.httpAbortLaunch = exports.httpAddNewLaunch = exports.httpGetAllLaunches = void 0;
 const launches_model_1 = require("../../models/launches.model");
 // @                                          Get All Launches
 function httpGetAllLaunches(req, res) {
@@ -31,3 +31,19 @@ function httpAddNewLaunch(req, res) {
     return res.status(201).json(launch);
 }
 exports.httpAddNewLaunch = httpAddNewLaunch;
+// @                                                 Abort Launch
+function httpAbortLaunch(req, res) {
+    const launchId = parseInt(req.params.id);
+    //# if launch doesn't exist
+    if (!(0, launches_model_1.existsLaunchWithId)(launchId)) {
+        return res.status(404).json({
+            error: "Launch not found",
+        });
+    }
+    else {
+        //# if launch exists
+        const aborted = (0, launches_model_1.abortLaunchById)(launchId);
+        res.status(200).json(aborted);
+    }
+}
+exports.httpAbortLaunch = httpAbortLaunch;

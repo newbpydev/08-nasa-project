@@ -1,7 +1,12 @@
 import { Request, Response } from "express";
 import { Launch } from "../../../types/launch";
 
-import { getAllLaunches, addNewLaunch } from "../../models/launches.model";
+import {
+  getAllLaunches,
+  addNewLaunch,
+  existsLaunchWithId,
+  abortLaunchById,
+} from "../../models/launches.model";
 
 // @                                          Get All Launches
 function httpGetAllLaunches(req: Request, res: Response) {
@@ -37,4 +42,20 @@ function httpAddNewLaunch(req: Request, res: Response) {
   return res.status(201).json(launch);
 }
 
-export { httpGetAllLaunches, httpAddNewLaunch };
+// @                                                 Abort Launch
+function httpAbortLaunch(req: Request, res: Response) {
+  const launchId = parseInt(req.params.id);
+
+  //# if launch doesn't exist
+  if (!existsLaunchWithId(launchId)) {
+    return res.status(404).json({
+      error: "Launch not found",
+    });
+  } else {
+    //# if launch exists
+    const aborted = abortLaunchById(launchId);
+    res.status(200).json(aborted);
+  }
+}
+
+export { httpGetAllLaunches, httpAddNewLaunch, httpAbortLaunch };

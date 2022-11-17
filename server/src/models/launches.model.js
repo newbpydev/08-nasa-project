@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addNewLaunch = exports.getAllLaunches = void 0;
+exports.abortLaunchById = exports.addNewLaunch = exports.getAllLaunches = exports.existsLaunchWithId = void 0;
 const launches = new Map();
 let latestFlightNumber = 100;
 const launch = {
@@ -14,6 +14,11 @@ const launch = {
     success: true,
 };
 launches.set(launch.flightNumber, launch);
+// @                                   existsLaunchWithId()
+function existsLaunchWithId(launchId) {
+    return launches.has(launchId);
+}
+exports.existsLaunchWithId = existsLaunchWithId;
 // @                                   getAllLaunches()
 function getAllLaunches() {
     // # launches.values() return an iterable
@@ -30,3 +35,13 @@ function addNewLaunch(launch) {
     }));
 }
 exports.addNewLaunch = addNewLaunch;
+// @                                   abortLaunchById()
+function abortLaunchById(launchId) {
+    const aborted = launches.get(launchId);
+    if (aborted) {
+        aborted.upcoming = false;
+        aborted.success = false;
+        return aborted;
+    }
+}
+exports.abortLaunchById = abortLaunchById;
