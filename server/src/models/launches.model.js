@@ -1,8 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllLaunches = void 0;
+exports.addNewLaunch = exports.getAllLaunches = void 0;
 const launches = new Map();
-const lauch = {
+let latestFlightNumber = 100;
+const launch = {
     flightNumber: 100,
     mission: "Kepler Exploration X",
     rocket: "Explorer IS1",
@@ -12,9 +13,20 @@ const lauch = {
     upcoming: true,
     success: true,
 };
-launches.set(lauch.flightNumber, lauch);
+launches.set(launch.flightNumber, launch);
+// @                                   getAllLaunches()
 function getAllLaunches() {
     // # launches.values() return an iterable
     return Array.from(launches.values());
 }
 exports.getAllLaunches = getAllLaunches;
+function addNewLaunch(launch) {
+    latestFlightNumber++;
+    launches.set(latestFlightNumber, Object.assign(launch, {
+        customer: ["Zero to Mastery", "NASA"],
+        upcoming: true,
+        success: true,
+        flightNumber: latestFlightNumber,
+    }));
+}
+exports.addNewLaunch = addNewLaunch;

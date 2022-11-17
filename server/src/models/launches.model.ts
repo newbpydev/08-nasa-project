@@ -4,7 +4,7 @@ const launches = new Map<number, Launch>();
 
 let latestFlightNumber = 100;
 
-const lauch: Launch = {
+const launch: Launch = {
   flightNumber: 100,
   mission: "Kepler Exploration X",
   rocket: "Explorer IS1",
@@ -15,8 +15,9 @@ const lauch: Launch = {
   success: true,
 };
 
-launches.set(lauch.flightNumber, lauch);
+launches.set(launch.flightNumber, launch);
 
+// @                                   getAllLaunches()
 function getAllLaunches() {
   // # launches.values() return an iterable
   return Array.from(launches.values());
